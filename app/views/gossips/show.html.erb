@@ -1,0 +1,31 @@
+<h1><%= @gossip.title %></h1>
+<p>Find me in app/views/gossips/show.html.erb</p≠≠m>
+<p><%= @gossip.content %></p>
+<p>Auteur : <%= @gossip.user.email %></p>
+<p>Ville : <%= @gossip.user.city.name %></p>
+
+<%= link_to 'Modifier', edit_gossip_path(@gossip) %>
+<%= link_to 'Supprimer', gossip_path(@gossip), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+<%= link_to 'Retour', gossips_path %>
+<h2>Commentaires</h2>
+<%= form_with model: [ @gossip, @gossip.comments.build ] do |form| %>
+  <div>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit "Ajouter un commentaire" %>
+  </div>
+<% end %>
+
+<ul>
+  <% @gossip.comments.each do |comment| %>
+    <li>
+      <p><%= comment.content %></p>
+      <p>Auteur : <%= comment.user.email %></p>
+      <%= link_to 'Modifier', edit_gossip_comment_path(@gossip, comment) %>
+      <%= link_to 'Supprimer', gossip_comment_path(@gossip, comment), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+    </li>
+  <% end %>
+</ul>
+
+

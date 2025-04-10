@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  <!-- ... -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/svg-with-js.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/v4-shims.min.css" rel="stylesheet">
+  <title>GossipProject</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_pack_tag 'application' %>
+  <nav>
+  <% if current_user %>
+    <%= link_to 'Se déconnecter', session_path(current_user), method: :delete %>
+  <% else %>
+  <%= link_to "Déconnexion", logout_path, method: :delete, data: { confirm: "Tu veux vraiment te déconnecter ?" } %>
+    <%= link_to 'Accueil', root_path %>
+    <%= link_to 'Créer un potin', new_gossip_path %>
+    <%= link_to 'Mes potins', user_path(current_user) %>
+    <%= link_to 'Mes commentaires', user_comments_path(current_user) %>
+    <%= link_to 'Mes villes', user_cities_path(current_user) %>
+    <%= link_to 'Mes tags', user_tags_path(current_user) %>
+    <%= link_to 'Mes utilisateurs', user_users_path(current_user) %>
+    <%= link_to 'Mes sessions', user_sessions_path(current_user) %>
+    <%= link_to 'Mes messages', user_messages_path(current_user) %>
+    <%= link_to 'Mes notifications', user_notifications_path(current_user) %>
+    <%= link_to 'Mes amis', user_friends_path(current_user) %>
+    <%= link_to 'Mes groupes', user_groups_path(current_user) %>
+    <%= link_to 'Mes événements', user_events_path(current_user) %>
+    <%= link_to 'Mes photos', user_photos_path(current_user) %>
+    <%= link_to 'Mes vidéos', user_videos_path(current_user) %>
+    <%= link_to 'Mes fichiers', user_files_path(current_user) %>
+    <%= link_to 'Mes documents', user_documents_path(current_user) %>
+    <%= link_to 'Mes messages privés', user_private_messages_path(current_user) %>
+    <%= link_to 'Mes discussions', user_discussions_path(current_user) %>
+    <%= link_to 'S\'inscrire', new_user_path %>
+    <%= link_to 'Se connecter', new_session_path %>
+    <%= link_to "Déconnexion", logout_path, method: :delete, data: { confirm: "T'es sûre de vouloir quitter ?" } %>
+
+  <% end %>
+</nav>
+
+    <title><%= content_for(:title) || "Gossip Project" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= yield %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Gossip Project</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to 'Accueil', root_path, class: 'nav-link' %>
+        </li>
+        <% if current_user %>
+          <li class="nav-item">
+            <%= link_to 'Se déconnecter', session_path(current_user), method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'S\'inscrire', new_user_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Se connecter', new_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+  </body>
+</html>
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-danger"><%= alert %></div>
+<% end %>
+<% if flash[:error] %>
+  <div class="alert alert-danger"><%= flash[:error] %></div>
+<% end %>
+<%= favicon_link_tag asset_path('favicon.ico') %>
+<%= tag.link rel: 'apple-touch-icon', href: asset_path('apple-touch-icon.png') %>

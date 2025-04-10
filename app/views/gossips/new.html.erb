@@ -1,0 +1,26 @@
+<h1>Créer un nouveau potin</h1>
+<p>Find me in app/views/gossips/new.html.erb</p>
+<%= form_tag gossips_path do %>
+  <div>
+    <%= label_tag :title %>
+    <%= text_field_tag :title, @gossip.title %>
+  </div>
+  <div>
+    <%= label_tag :content %>
+    <%= text_area_tag :content, @gossip.content %>
+  </div>
+  <div>
+    <%= submit_tag "Créer le potin" %>
+  </div>
+<% end %>
+
+<% if @gossip.errors.any? %>
+  <div>
+    <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+    <ul>
+      <% @gossip.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

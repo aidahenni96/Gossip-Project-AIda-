@@ -1,0 +1,40 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+/* Exemple de CSS personnalisé */
+
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+h1 {
+  color: #333;
+  text-align: center;
+}
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+/* 
+ * You can add your own CSS rules here.
+ * For example:
+ * body {
+ *   background-color: #f0f0f0;
+ * }
+ */
+/* 
+ * You can also include other CSS files here. For example:
+ * @import "styles/variables";
+ * @import "styles/layout";
+ * @import "styles/components";
+ */

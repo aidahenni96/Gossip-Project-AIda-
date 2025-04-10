@@ -1,0 +1,5 @@
+<h1>Gossip Project</h1>
+<% @gossips.each do |gossip| %>
+  <p><%= gossip.title %> (<%= gossip.comments.count %> commentaires)</p>
+  <%= link_to 'Voir', gossip_path(gossip) %>
+<% end %>

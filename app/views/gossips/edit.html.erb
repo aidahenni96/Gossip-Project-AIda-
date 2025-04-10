@@ -1,0 +1,25 @@
+<h1>Editer le potin</h1>
+<p>Find me in app/views/gossips/edit.html.erb</p>
+<%= form_with model: @gossip do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit "Mettre à jour" %>
+  </div>
+<% end %>
+<h1>Éditer le commentaire</h1>
+
+<%= form_with model: [@gossip, @comment] do |form| %>
+  <div>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit "Mettre à jour" %>
+  </div>
+<% end %>
